@@ -21,5 +21,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: trading-box/v2ray-xui/xui
+          repository: trading-box/repo-xui/xui
           tag_with_ref: true
+
+          docker run -itd --network=host \
+    -v /root/x-ui/db/:/etc/x-ui/ \
+    -v /root/x-ui/cert/:/root/cert/ \
+    --name x-ui --restart=unless-stopped \
+    enwaiax/x-ui:latest
