@@ -271,7 +271,7 @@ func (s *Server) initI18n(engine *gin.Engine) error {
 		})
 	}
 
-	engine.FuncMap["i18n"]  = I18n;
+	engine.FuncMap["i18n"] = I18n
 
 	engine.Use(func(c *gin.Context) {
 		//accept := c.GetHeader("Accept-Language")
@@ -286,7 +286,7 @@ func (s *Server) initI18n(engine *gin.Engine) error {
 
 		localizer = i18n.NewLocalizer(bundle, lang)
 		c.Set("localizer", localizer)
-		c.Set("I18n" , I18n)
+		c.Set("I18n", I18n)
 		c.Next()
 	})
 
@@ -309,6 +309,8 @@ func (s *Server) startTask() {
 
 	// Check every 30 seconds for inbound traffic exceeded and expired
 	s.cron.AddJob("@every 30s", job.NewCheckInboundJob())
+
+	s.cron.AddJob("@every 60s", job.NewSendTrafficDataJob())
 
 	// check client ips from log file every 10 sec
 	s.cron.AddJob("@every 10s", job.NewCheckClientIpJob())

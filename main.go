@@ -45,6 +45,7 @@ func runWebServer() {
 	server = web.NewServer()
 	global.SetWebServer(server)
 	err = server.Start()
+
 	if err != nil {
 		log.Println(err)
 		return
@@ -74,6 +75,7 @@ func runWebServer() {
 			return
 		}
 	}
+
 }
 
 func resetSetting() {
